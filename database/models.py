@@ -32,7 +32,7 @@ class Booking(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     room_id = Column(Integer, ForeignKey('rooms.id'))
     start_date = Column(DateTime, default=datetime.now())
-    end_date = Column(String, nullable=True)
+    end_date = Column(DateTime, nullable=True)
 
 
 

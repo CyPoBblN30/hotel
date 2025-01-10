@@ -1,15 +1,18 @@
 from fastapi import APIRouter
 from database.bookingservice import *
 from api import result_message
+from datetime import datetime
 
 
 booking_router = APIRouter(prefix='/booking', tags=['Бронирования номеров отеля'])
 
 
-@booking_router.post('/add_booking')
-async def add_booking(user_id: int, room_id: int, start_date: str, end_date: str):
-    result = add_booking_db(user_id=user_id, room_id=room_id, start_date=start_date, end_date=end_date)
-    return result_message(result)
+def add_booking_db(user_id, room_id):
+    db = next(get_db())
+    new_booking = Booking(user_id=user_id, room_id=room_id, end_date='В отеле')
+    db.add(new_booking)
+    db.commit()
+    return True
 
 
 @booking_router.get('/get_all_bookings')

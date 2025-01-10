@@ -3,9 +3,9 @@ from database.models import Booking
 
 
 # добавление бронирования
-def add_booking_db(user_id, room_id, start_date, end_date):
+def add_booking_db(user_id, room_id, end_date):
     db = next(get_db())
-    new_booking = Booking(user_id=user_id, room_id=room_id, start_date=start_date, end_date=end_date)
+    new_booking = Booking(user_id=user_id, room_id=room_id, end_date=end_date)
     db.add(new_booking)
     db.commit()
     return True
